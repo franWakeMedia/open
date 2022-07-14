@@ -23,15 +23,14 @@ const twDescription = document.querySelectorAll("#twDescription")
 ogDescription[0].content = myPost.description
 twDescription[0].content = myPost.description
 
-(()=>{
-    const navInfo = window.navigator.appVersion.toLowerCase();
-    if(navInfo.indexOf('win') != -1)
-    {
-        console.log('Estamos en windows')
-        window.location.href = 'https://www.disenaelcambio.com/';
-    }
-    else{
-        console.log('Estamos en telefono')
-        window.location.href = `exp://127.0.0.1:19000/--/open?id=${prodId}`
-    }
-})()
+const navInfo = window.navigator.appVersion.toLowerCase();
+if(navInfo.indexOf('win') != -1)
+{
+    console.log('Estamos en windows')
+    window.location.href = 'https://www.disenaelcambio.com/';
+}
+else{
+    console.log('Estamos en telefono')
+    window.location.href = `exp://127.0.0.1:19000/--/open?id=${prodId}`
+}
+
