@@ -23,6 +23,7 @@ const twDescription = document.querySelectorAll("#twDescription")
 ogDescription[0].content = myPost.description
 twDescription[0].content = myPost.description
 
+// Redireccionamiesto
 const navInfo = window.navigator.appVersion.toLowerCase();
 if(navInfo.indexOf('win') != -1)
 {
@@ -31,6 +32,6 @@ if(navInfo.indexOf('win') != -1)
 }
 else{
     console.log('Estamos en telefono')
-    window.location.href = `exp://127.0.0.1:19000/--/open?id=${prodId}`
+    window.location.href = `somoselcambio://open?id=${prodId}`
 }
 
