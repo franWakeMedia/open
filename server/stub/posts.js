@@ -31,4 +31,4 @@ const usersPosts =[
     },
 ]
 
-export { usersPosts }
+module.exports.getPostById = id => usersPosts.filter((item) => item.id == id)[0]
