@@ -8,10 +8,30 @@
     <meta name="og:title" content="__META_OG_TITLE__"/>
     <meta name="og:description" content="__META_OG_DESCRIPTION__"/>
     <meta name="og:image" content="__META_OG_IMAGE__"/>
-
+    <meta property="og:type" content="application"/>
+    <meta property="og:url" content="somoselcambio://open" />
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
 </head>
 <body>  
-    <script src="./src/main.mjs" type="module"></script>
+    <H1>Estas en <samp id="sistemaOperativo"></samp></H1>
+    <script>
+        const title = document.getElementById("sistemaOperativo")
+        let Name = "Unknown OS";
+        if (navigator.userAgent.indexOf("Win") != -1) {
+          Name = "Windows OS";
+          // window.location.href = 'https://www.disenaelcambio.com/'
+        }
+        if (navigator.userAgent.indexOf("Mac") != -1) Name = 
+          "Mac";
+        if (navigator.userAgent.indexOf("Linux") != -1) Name = 
+          "Linux OS";
+        if (navigator.userAgent.indexOf("Android") != -1) Name = 
+          "Android OS";
+        if (navigator.userAgent.indexOf("like Mac") != -1) Name = 
+          "iOS";
+
+        title.innerText = Name
+
+    </script>
 </body>
 </html>

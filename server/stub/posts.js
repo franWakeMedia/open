@@ -1,34 +1,47 @@
-const usersPosts =[
-    {
-        id: 0,
-        username:'ErrrorUsername',
-	    name:'ErrrorName',
-	    description:'ErrrorDescription',
-	    location:'ErrrorLocantion',
-	    urlImage:'https://www.cinco8.com/wp-content/uploads/2020/08/404.png',
-	    publicationDate:"ErrrorDate",
-	    tag:"Medio ambiente",
-    },
-    {
-        id: 1,
-        username:'maria_123',
-	    name:'Mariana Martinez',
-	    description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
-	    location:'Parque Monterrey',
-	    urlImage:'https://i.pinimg.com/736x/49/f5/e9/49f5e95ee672093c4c35db91f4c9310e.jpg',
-	    publicationDate:"06 Agosto 2019 4:30 PM",
-	    tag:"Medio ambiente",
-    },
-    {
-        id: 2,
-        username:'eugenio123',
-	    name:'Eugenio Gonzáles',
-	    description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit,ullamco laboris nisi ut aliquip ex ea commodo consequat',
-	    location:'Parque CDMX',
-	    urlImage:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwbpXLGBFla_YWaTo73mETnyUXGdWFKs_t_w&usqp=CAU',
-	    publicationDate:"06 Agosto 2019 9:30 AM",
-	    tag:"Tecnologia",
-    },
-]
+const fetch = require ('node-fetch') 
 
-module.exports.getPostById = id => usersPosts.filter((item) => item.id == id)[0]
+const getData = async (id) => {
+  const requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  const apiURL = "https://api.somoselcambio.net/api/node/post"
+  try{
+    const response = await fetch(apiURL, requestOptions)
+    const data = await response.json()
+      const rtaId = data.data.filter((item) => item.id == id)[0]
+	  console.log(data.data)
+      return rtaId
+  }catch (error){
+      console.log("Fetch Error: ", error);
+  }
+}
+
+const getImage = async (idImage) => {
+  const requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  const apiURL = `https://api.somoselcambio.net/api/media/image/${idImage}/field_image`
+  try{
+    const response = await fetch(apiURL, requestOptions)
+    const data = await response.json()
+    return data.data.attributes.uri.url
+  }catch (error){
+      console.log("Fetch Error: ", error);
+  }
+}
+
+const getPostById = async (id) => {
+  const postInfo = await getData(id)
+  const idImagePost = postInfo["relationships"]["media_image"]["data"]["id"]
+  const imagePost = await getImage(idImagePost)
+
+  return {
+    description: postInfo.attributes.body.value,
+    urlImage: imagePost
+  }
+}
+        
+
+module.exports.getPostById = (postId) => getPostById(postId)
