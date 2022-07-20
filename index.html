@@ -13,31 +13,28 @@
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
 </head>
 <body>  
-    <!-- <H1>Estas en <samp id="sistemaOperativo"></samp></H1> -->
     <script>
-        // const title = document.getElementById("sistemaOperativo")
-        // let Name = "Unknown OS";
-        // if (navigator.userAgent.indexOf("Win") != -1) {
-        //   Name = "Windows OS";
-        //   window.location.href = 'https://www.disenaelcambio.com/'
-        // }
-        // if (navigator.userAgent.indexOf("Mac") != -1) Name = 
-        //   "Mac";
-        // if (navigator.userAgent.indexOf("Linux") != -1) Name = 
-        //   "Linux OS";
-        if (navigator.userAgent.indexOf("Android") != -1) {
-          // Name = "Android OS";
-          window.location = "https://play.google.com/store/apps/details?id=com.sec.somoselcambio";
-        }
-        else if (navigator.userAgent.indexOf("like Mac") != -1){ 
-          // Name = "iOS";
-          window.location = "https://itunes.apple.com/mx/app/somos-el-cambio/id1533163650";
-        }
-        else{
-          window.location.href = 'https://www.disenaelcambio.com/'
-        }
-        title.innerText = Name
-
-    </script>
+      const idPost = 1
+      if (navigator.userAgent.indexOf("Android") != -1) {
+        const now = new Date().valueOf()
+        setTimeout(function () {
+            if (new Date().valueOf() - now > 100) return;
+            window.location = "https://play.google.com/store/apps/details?id=com.sec.somoselcambio"
+        }, 25)
+        window.location = `somoselcambio://open?id=${idPost}`
+      }
+      else if (navigator.userAgent.indexOf("like Mac") != -1){ 
+        const now = new Date().valueOf()
+        setTimeout(function () {
+          if (new Date().valueOf() - now > 100) return;
+          // window.location = "https://itunes.apple.com/mx/app/somos-el-cambio/id1533163650";
+          window.location = "itms-apps://itunes.apple.com/app/somos-el-cambio/id1533163650";
+        }, 25)
+        window.location = `somoselcambio://open?id=${idPost}`
+      }
+      else{
+        window.location.href = 'https://www.disenaelcambio.com/'
+      }
+  </script>
 </body>
 </html>
