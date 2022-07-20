@@ -34,11 +34,11 @@ const getImage = async (idImage) => {
 
 const getPostById = async (id) => {
   const postInfo = await getData(id)
-  const idImagePost = postInfo["relationships"]["media_image"]["data"]["id"]
+  const idImagePost = postInfo?.relationships["media_image"]["data"]["id"]
   const imagePost = await getImage(idImagePost)
 
   return {
-    description: postInfo.attributes.body.value,
+    description: postInfo?.attributes.body.value,
     urlImage: imagePost
   }
 }
